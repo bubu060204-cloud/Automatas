@@ -23,6 +23,7 @@ public class Pract2ER {
 
         ele = JOptionPane.showInputDialog("\n1.-identificador\n2.-int\n3.-long\n(todavia no)4.-float\n(todavia no)5.-d    ouble\n6.-char\n7.-String\n8.-boolean\n9.-Salir");
         // Se elige una opción para el menú
+        contadorPuntos= 0; // Despues de cada ejecución el contador de puntos se reinicia para evitar errores de detección
             
         // ".*" Para String, "." Para char, "true|false" para boolean, "(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*" para int, ".*" para ID con un if aparte que verifique el primer o siguiente caracter,
         switch (ele) {
@@ -172,7 +173,7 @@ public class Pract2ER {
                         }
                     }
                     if (contadorPuntos <= 1) {
-                        // checa si es que el penultimo caracter no es . para evitar que sea algo tipo 3.f
+                        // checa si es que el penultimo caracter no es . para evitar que sea algo tipo 3.d
 
                         if (cadena.length() > 1) {
                             if (cadena.charAt(cadena.length() - 2) != '.') {
