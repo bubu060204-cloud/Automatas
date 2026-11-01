@@ -8,6 +8,12 @@ public class main {
 
     public static void main(String[] args){
 
+        
+        String[] arrLit = {"short", "int", "long", "double", "float", "boolean", "char", "String"} ;
+        String[] arrOp = {"++", "--", "!", "*", "/", "%", "+", "-", "<", ">", "<=", ">=", "==", "!=", "&&", "||", "?", "="} ;
+        String[] arrDelim = {"(", ")", "{", "}", "[", "]", ";", ",", "."} ;
+        String[] arrComent = {"//", "/","/", "/", "*//"};
+
 
         String ele = JOptionPane.showInputDialog("Coloca una instrucción");
         esIdentificador(ele);
