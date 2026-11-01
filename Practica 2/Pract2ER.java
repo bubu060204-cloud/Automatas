@@ -67,15 +67,14 @@ public class Pract2ER {
 
                 
 
-                if (mat1.matches()) {
-                    
+                if (mat1.matches()) { // Primero se comprueba si la cadena coincide, como es cualquier combinacion de caracteres siempre lo hara
+                
+                    if(!(matComp.matches())){ // Segundo filtro: Si es que el primer caracter no es un numero pasa la "prueba"
+                        
+                        for(int i=0;i<=tokens.length-1;i++){ // Se recorre el arreglo de palabras reservadas para compararlas con la cadena ingresada
+                            
 
-                    if(!(matComp.matches())){
-
-                        // se hace una comparación con todas las palabras reservadas
-                        for(int i=0;i<=tokens.length-1;i++){
-
-                            if(cadena.equals(tokens[i])){
+                            if(cadena.equals(tokens[i])){ // Si la cadena coincide
                                 System.out.println("No es una cadena ya que ocupa una palabra reservada");
                                 esPalabraReservada=true;
                                 break;
