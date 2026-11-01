@@ -1,26 +1,27 @@
-import javax.swing.*;
+import javax.swing.*; // Libreria para elementos gráficos
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.Matcher; // Se ocupa para comprobar si es que un String coincide con un patron (una expresión regular)
+import java.util.regex.Pattern; // Se ocupa para tener un patron, es decir una expresion regular
 
 
 public class Pract2ER {
     public static void main(String[] args) {
 
-        String cadena = "";
-        int contadorPuntos = 0;
-        String ele = "";
+        String cadena = ""; // Se inicializa cadena que sera donde se coloca el String a comparar
+        int contadorPuntos = 0; // Variable que se usa al comprobar si una LITERAL es un float o un double, se usa para comprobar si es que un STRING no tiene más de dos puntos ( ya que de acuerdo a la sintaxis de float o double esto no seria correcto)
+        String ele = ""; // Variable que maneja la elección de elementos en el programa
 
 
-        boolean seguirCiclo= true;
+        boolean seguirCiclo= true; // Maneja si es que el ciclo continua, el ciclo que maneja el programa
 
-        boolean esPalabraReservada=false;
-        boolean contieneCaracteresNoPermitidos=false;
+        boolean esPalabraReservada=false; // Usado para validar identificadores, sirve para ver si un identificador es valido o no, si es una palabra reservada no lo es
+        boolean contieneCaracteresNoPermitidos=false; // Si el IDENTIFICADOR contiene caracteres como @ no sera valido
 
         do {
 
-        ele = JOptionPane.showInputDialog("\n1.-identificador\n2.-int\n3.-long\n(todavia no)4.-float\n(todavia no)5.-double\n6.-char\n7.-String\n8.-boolean\n9.-Salir");
-
+        ele = JOptionPane.showInputDialog("\n1.-identificador\n2.-int\n3.-long\n(todavia no)4.-float\n(todavia no)5.-d    ouble\n6.-char\n7.-String\n8.-boolean\n9.-Salir");
+        // Se elige una opción para el menú
+            
         // ".*" Para String, "." Para char, "true|false" para boolean, "(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*" para int, ".*" para ID con un if aparte que verifique el primer o siguiente caracter,
         switch (ele) {
             case "1":
