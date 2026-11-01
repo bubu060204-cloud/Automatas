@@ -4,6 +4,8 @@ import java.util.regex.Matcher; // Se ocupa para comprobar si es que un String c
 import java.util.regex.Pattern; // Se ocupa para tener un patron, es decir una expresion regular
 
 
+// Cualquier duda con el codigo o los comentarios mandenme un mensaje al whats
+
 public class Pract2ER {
     public static void main(String[] args) {
 
@@ -25,6 +27,7 @@ public class Pract2ER {
         // ".*" Para String, "." Para char, "true|false" para boolean, "(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*" para int, ".*" para ID con un if aparte que verifique el primer o siguiente caracter,
         switch (ele) {
             // Todos los casos en el switch siguen la misma logica, un patron (que es la expresión regular), un matcher que de acuerdo al patron verifica si la cadena es valida y el resultado
+                
             case "1": // La cadena ingresada es un identificador?
                 // Para este caso hay tres REGLAS que debe seguir un identificador para que el programa lo capte como un IDENTIFICADOR
                 //Reglas
@@ -73,72 +76,81 @@ public class Pract2ER {
                         
                         for(int i=0;i<=tokens.length-1;i++){ // Se recorre el arreglo de palabras reservadas para compararlas con la cadena ingresada
                             
-
-                            if(cadena.equals(tokens[i])){ // Si la cadena coincide
+                            if(cadena.equals(tokens[i])){ // Si la cadena coincide con alguna palabra reservada no sera valida
                                 System.out.println("No es una cadena ya que ocupa una palabra reservada");
-                                esPalabraReservada=true;
+                                esPalabraReservada=true; // este booleano se ocupara para la condición final del caso
                                 break;
                             }
-
                         }
 
-                        for(int i=0;i<=caracteresNoPermitidos.length-1;i++){
+                        for(int i=0;i<=caracteresNoPermitidos.length-1;i++){ // Se usa el arreglo de los caracteres no permitidos para buscarlos dentro de la cadena ingresada
 
                             // se agarra un caracter y se busca ese caracter en la cadena
                             // si no se encuentra quiere decir que es una cadena valida
-                            for(int j=0;j<=cadena.length()-1;j++){
+                            
+                            for(int j=0;j<=cadena.length()-1;j++){ // Cada caracter de la lista de no permitidos se a comparar con CADA uno de los caracteres de la cadena a validar
 
-                                if(caracteresNoPermitidos[i]==cadena.charAt(j)){
-                                    contieneCaracteresNoPermitidos=true;
+                                if(caracteresNoPermitidos[i]==cadena.charAt(j)){ // Si alguno de los caracteres no permitidos y los de la cadena coincide  la cadena no sera valida
+                                     
+                                    contieneCaracteresNoPermitidos=true; // Booleano que ayudara a la comprobación final
                                 }
                             }
                         }
-                        if(contieneCaracteresNoPermitidos){
+                        if(contieneCaracteresNoPermitidos){ // Mensaje que indica que la cadena ingresada no es valida
                             System.out.println("No es una cadena tipo id ya que hay caracteres no validos!");
                         }
 
-                        if(!contieneCaracteresNoPermitidos && !esPalabraReservada){
-                            System.out.println("Si es un identificador valido");
+                        if(!contieneCaracteresNoPermitidos && !esPalabraReservada){ // Si no es una palabra reservada y no tiene caracteres no permitidos es valida
+                            System.out.println("Si es un identificador valido"); // Se imprime que si es valida
                         }
 
                     }
 
                 }
                 break;
-            case "2":
-                cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat2 = Pattern.compile("(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*");
+            case "2": // int
+                // POR IMPLEMENTAR: Diferencia de caracteres entre un int y un long, es diferente la cantidad de caracteres que soportan pero en las expresiones regulares no hay diferencia todavia.
+                cadena = JOptionPane.showInputDialog("Ingresa cadena"); // Se pide una cadena 
+                Pattern pat2 = Pattern.compile("(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*"); // Esta expresión regular es lo mismo que [0-9] es decir cualquier cantidad de caracteres
+                                                                                    // que sean numeros del 0 al 9 
                 Matcher mat2 = pat2.matcher(cadena);
                 // Por hacer checar el tamaño de int
-                if (mat2.matches()) {
+                if (mat2.matches()) { // Se checa si coincide la cadena con la expresión regular
                     System.out.println("Si es una cadena tipo int");
                 }
                 break;
-            case "3":
+                
+            case "3": // Long
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat3 = Pattern.compile("([0-9])*");
+                Pattern pat3 = Pattern.compile("([0-9])*"); // Puede ser cualquier caracter del alfabeto [0-9] cualquier cantidad de veces
                 Matcher mat3 = pat3.matcher(cadena);
                 // Por hacer checar el tamaño de int
                 if (mat3.matches()) {
                     System.out.println("Si es una cadena tipo long");
                 }
                 break;
-            case "4":
+            case "4": // float
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
                 // el "//" es para que reconozca el punto como caracter xd
-                Pattern pat7 = Pattern.compile("([0-9]|\\.)*f");
+                // si se pone "//" no reconoce al '.' como comodin
+                Pattern pat7 = Pattern.compile("([0-9]|\\.)*f"); // La expresion regular indica que puede ser cualquier cantidad de numeros o puntos siempre terminando con una f
+                                                                 // por lo que cadenas como ....3f serian validas, es por eso que hay unos if's que hacen unas validaciones extras
                 Matcher mat7 = pat7.matcher(cadena);
-                if (mat7.matches()) {
+                
+                if (mat7.matches()) { // Si la cadena coincide se hacen unas comprobaciones consecuentes
 
-                    for (int i = 0; i <= cadena.length() - 1; i++) {
-                        if (cadena.charAt(i) == '.') {
-                            contadorPuntos += 1;
+                    for (int i = 0; i <= cadena.length() - 1; i++) { // Se recorre la cadena en busca de caracteres '.' o puntos
+                        if (cadena.charAt(i) == '.') { 
+                            contadorPuntos += 1; // Si se encuentra un punto se agrega uno al contador
                         }
                     }
-                    if (contadorPuntos <= 1) {
+                    if (contadorPuntos <= 1) { // Si es que al recorrer la cadena la cantidad de puntos es menor o igual 1 ( hay un punto o ninguno)
+                                               // se hace una ultima evaluación, hay un punto como ´penultimo caracter? algo como 5.f
+                                               // si es que si lo hay este sera invalido
+                    
                         // checa si es que el penultimo caracter no es . para evitar que sea algo tipo 3.f
                         if (cadena.length() > 1) { // comprobación de que el tamaño del string es mayor a 1 para evitar errores
-                            if (cadena.charAt(cadena.length() - 2) != '.') {
+                            if (cadena.charAt(cadena.length() - 2) != '.') { // Si el penultimo caracter no es un punto entonces es una cadena valida
 
                                 System.out.println("Si es una cadena tipo float");
 
@@ -147,9 +159,9 @@ public class Pract2ER {
                     }
                 }
                 break;
-            case "5":
+            case "5": // Double, mismo codigo que float solo que al final de la expresión regular es una d
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat8 = Pattern.compile("([0-9]|\\.)*d");
+                Pattern pat8 = Pattern.compile("([0-9]|\\.)*d"); // Al final tiene que haber una d, de ahi en mas es igual al float
                 Matcher mat8 = pat8.matcher(cadena);
                 // Por hacer checar el tamaño de int
                 if (mat8.matches()) {
@@ -172,42 +184,44 @@ public class Pract2ER {
                     }
                 }
                 break;
-            case "6":
+
+                // De aqui en adelante solo se va explicar la expresión regular porque siguen la mimsa logica los casos
+            case "6": // Char
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat4 = Pattern.compile(".");
+                Pattern pat4 = Pattern.compile("."); // Puede ser cualquier caracter ya que es un comodin
                 Matcher mat4 = pat4.matcher(cadena);
                 // Por hacer checar el tamaño de int
                 if (mat4.matches()) {
                     System.out.println("Si es una cadena tipo char");
                 }
                 break;
-            case "7":
+            case "7": // String
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat5 = Pattern.compile(".*");
+                Pattern pat5 = Pattern.compile(".*"); // Puede ser cualquier caracter sin limite de cantidad del mismo
                 Matcher mat5 = pat5.matcher(cadena);
                 // Por hacer checar el tamaño de int
                 if (mat5.matches()) {
                     System.out.println("Si es una cadena tipo String");
                 }
                 break;
-            case "8":
+            case "8": // Booleanos
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat6 = Pattern.compile("true|false");
+                Pattern pat6 = Pattern.compile("true|false"); // la expresión solo puede ser true o false
                 Matcher mat6 = pat6.matcher(cadena);
                 // Por hacer checar el tamaño de int
                 if (mat6.matches()) {
                     System.out.println("Si es una cadena tipo booleano");
                 }
                 break;
-            case "9":
+            case "9": // Condición de salida
                 seguirCiclo=false;
                 break;
-            default:
+            default: // Condición por defecto si no coincide con alguna del 1 al 9
                 System.out.println("XD");
                 break;
         }
 
-    }while(seguirCiclo);
+    }while(seguirCiclo); // Si seguirCiclo es verdadero sigue el ciclo
 
     }
 }
