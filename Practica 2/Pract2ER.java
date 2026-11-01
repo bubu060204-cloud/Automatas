@@ -24,21 +24,37 @@ public class Pract2ER {
             
         // ".*" Para String, "." Para char, "true|false" para boolean, "(1*|2*|3*|4*|5*|6*|7*|8*|9*|0*)*" para int, ".*" para ID con un if aparte que verifique el primer o siguiente caracter,
         switch (ele) {
-            case "1":
+            // Todos los casos en el switch siguen la misma logica, un patron (que es la expresión regular), un matcher que de acuerdo al patron verifica si la cadena es valida y el resultado
+            case "1": // La cadena ingresada es un identificador?
+                // Para este caso hay tres REGLAS que debe seguir un identificador para que el programa lo capte como un IDENTIFICADOR
+                //Reglas
+                // 1.- No se permiten caracteres caracteres como + – * / = % & # ! ? ^ “ ‘ ~ \ | < > ( )
+                // 2.- No puede empezar por un numero [0-9]
+                // 3.- No puede ser palabra reservada
+                
+                // El caso 1 es especial, en este primero se tiene un patron y un matcher, pero despues se ve otro 
+                // el segundo sirve para comparar el PRIMER caracter del string para asi validar la segunda regla "No puede empezar por un numero [0-9]"
                 cadena = JOptionPane.showInputDialog("Ingresa cadena");
-                Pattern pat1 = Pattern.compile(".*");
+                
+                Pattern pat1 = Pattern.compile(".*"); // La expresion regular es '.' ( '.' es un comodin es decir puede ser cualquier caracter) seguido de * ( por lo que la cadena puede ser cualquier caracter cualquier cantidad de veces)
+                // como puede ser cualquier caracter se usan if's despues para verificar su validez y que no viole las reglas ya establecidas
                 Matcher mat1 = pat1.matcher(cadena);
 
-                // Por hacer checar las verificaciones de tipo ID
+                // Expresión regular que tiene como Alfabeto del 0 al 9, esto para comprobar si el primer caracter de la cadena coincide con esta
                 Pattern patComp = Pattern.compile("[0-9]");
-                String complementario="";
+                String complementario=""; // String que guardara dentro de si el primer caracter de la cadena
+                
+                // Se guarda dentro del String complementario el primer caracter de la cadena 
                 complementario+=cadena.charAt(0);
                 Matcher matComp = patComp.matcher(complementario);
-                // caracteres como + – * / = % & # ! ? ^ “ ‘ ~ \ | < > ( )
+                
 
-
+                // Arreglo de caracteres no permitidos
+                // Si se encuentra alguno de estos se viola la reglas de "No se permiten caracteres caracteres como + – * / = % & # ! ? ^ “ ‘ ~ \ | < > ( )" por lo que la cadena no sera valida
                 char[] caracteresNoPermitidos={'+','-',' ','*','/','=','%','&','#','!','?','^','"','\'','~','\\','|','<','>','(',')','@',':',';'};
 
+                // Arreglo de palabras reservadas
+                // Si la cadena coincide al 100% con alguno de estos Strings no sera valida puesto que seria una palabra reservada
                 String[] tokens={"abstract","boolean","break","byte","byvalue","case","cast"
                         ,"catch","char","class","const","continue","default","do","double","else",
                         "extends", "final", "finally", "float", "for", "future", "generic",
@@ -49,8 +65,10 @@ public class Pract2ER {
                         "transient", "try", "var", "void", "while"
                 };
 
+                
+
                 if (mat1.matches()) {
-                    // si el primer caracter no es 0-9
+                    
 
                     if(!(matComp.matches())){
 
